@@ -229,6 +229,35 @@ footer.site .fbottom { display: flex; justify-content: space-between; margin-top
 }
 .dept-list .dept-sub:first-child { margin-top: 0; }
 
+/* WhatsApp Floating Button */
+.wa-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 13px 20px 13px 16px;
+  box-shadow: 0 4px 20px rgba(37,211,102,.38);
+  font-size: 13px;
+  font-family: "Jost", sans-serif;
+  letter-spacing: .04em;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.wa-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(37,211,102,.48);
+}
+.wa-btn svg { flex-shrink: 0; }
+.wa-btn .wa-label { line-height: 1.2; }
+.wa-btn .wa-label strong { display: block; font-weight: 500; font-size: 13px; }
+.wa-btn .wa-label span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; opacity: .82; }
+
 @media (max-width: 1000px) { .pgrid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) {
   .wrap { padding: 0 20px; }
@@ -236,4 +265,9 @@ footer.site .fbottom { display: flex; justify-content: space-between; margin-top
   .site .bar { grid-template-columns: 1fr auto; }
   footer.site .fgrid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 560px) { .pgrid { grid-template-columns: 1fr 1fr; } footer.site .fgrid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .pgrid { grid-template-columns: 1fr 1fr; }
+  footer.site .fgrid { grid-template-columns: 1fr; }
+  .wa-btn .wa-label { display: none; }
+  .wa-btn { padding: 14px; }
+}

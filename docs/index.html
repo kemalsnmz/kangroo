@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html lang="tr" data-mode="paper">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KANGROO — Butik markalar için ambalaj atölyesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/vitrin.css" />
+<style>
+  .hero { position: relative; }
+  .hero .ph.banner { aspect-ratio: 21/8; }
+  .hero .ph.banner::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(20,20,12,.66), rgba(20,20,12,.18) 55%, transparent); }
+  .hero .overlay { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; padding: 54px 54px 54px 80px; }
+  .hero .text-box { background: rgba(0,0,0,.28); backdrop-filter: blur(2px); padding: 20px 26px; display: inline-flex; flex-direction: column; max-width: 420px; }
+  .hero .overlay .label { color: #f1eee6; opacity: .9; }
+  .hero h1 { font-family: "Spectral", serif; font-weight: 500; font-size: clamp(40px, 5.6vw, 86px); line-height: 1; color: #f7f4ec; max-width: 18ch; margin-top: 10px; }
+  .hero h1 em { font-style: italic; }
+
+  .hero-word {
+    display: inline-block;
+    font-style: italic;
+    color: #b8e0c8;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-word .word-inner {
+    display: inline-block;
+  }
+  @keyframes wordSlideIn {
+    from { opacity: 0; transform: translateY(60%); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes wordSlideOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-60%); }
+  }
+  .hero-word.exit .word-inner  { animation: wordSlideOut .15s cubic-bezier(.4,0,.2,1) forwards; }
+  .hero-word.enter .word-inner { animation: wordSlideIn  .15s cubic-bezier(.4,0,.2,1) forwards; }
+  .hero .cta-row { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .btn.solid { background: #f7f4ec; color: #16170f; }
+  .hero .btn.ghost { border: 1px solid rgba(247,244,236,.6); color: #f7f4ec; }
+  .hero .btn.ghost:hover { background: rgba(247,244,236,.12); }
+
+  .cats-sec { padding: 10px 0 0; scroll-margin-top: 78px; }
+  .catalog { padding: 6px 0 48px; }
+  .catalog .sec-head { margin-bottom: 0; }
+
+  .story { padding: 20px 0 70px; }
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+  .story .ph { min-height: 380px; height: 100%; }
+  .story .copy { padding: 56px; display: flex; flex-direction: column; justify-content: center; }
+  .story .copy h2 { font-family: "Spectral", serif; font-weight: 500; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.08; margin: 10px 0 18px; }
+  .story .copy h2 em { font-style: italic; color: var(--accent); }
+  .story .copy p { font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 40ch; }
+  .story .copy a.more { margin-top: 24px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; align-self: flex-start; color: var(--ink); }
+  .story .copy a.more:hover { color: var(--accent); border-color: var(--accent); }
+
+  .strip { padding: 56px 0; border-top: 1px solid var(--line); }
+  .strip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .strip-grid .item .n { font-family: "Spectral", serif; font-style: italic; font-size: 22px; color: var(--accent); }
+  .strip-grid .item h3 { font-family: "Spectral", serif; font-weight: 500; font-size: 24px; margin: 8px 0 8px; }
+  .strip-grid .item p { font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+  .logos { padding: 40px 0 70px; }
+  .logos .row { display: flex; flex-wrap: wrap; gap: 14px 48px; align-items: center; opacity: .6; }
+  .logos .row span { font-family: "Spectral", serif; font-size: 22px; letter-spacing: .04em; }
+
+  header.site {
+    background: linear-gradient(to right, #888888 0%, #1a1a1a 30%, #000000 50%, #1a1a1a 70%, #888888 100%) !important;
+    backdrop-filter: none !important;
+  }
+  header.site nav a,
+  header.site .toggle { color: #f5f5f5 !important; font-size: 14px !important; letter-spacing: .14em !important; opacity: 1 !important; font-weight: 500 !important; }
+  header.site .toggle { border-color: rgba(255,255,255,.3) !important; font-size: 12px !important; }
+
+  @media (max-width: 900px) {
+    .hero .overlay { padding: 26px; }
+    .story-grid, .strip-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="util" style="background:#222222;color:#cccccc;">Ücretsiz numune · 50 adetten başlayan özel üretim · Türkiye geneli kargo</div>
+<header class="site">
+  <div class="wrap bar">
+    <nav class="left">
+      <a href="#urunler">Ürünler</a>
+      <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+      <div class="nav-item has-dropdown">
+        <a href="#">Departmanlar<svg class="chevron-icon" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="dept-mega">
+          <div class="dept-inner">
+            <div class="dept-label-row"><span>🏭 Departmanlar</span></div>
+            <div class="dept-cols">
+              <div class="dept-col">
+                <span class="dept-col-head">📐 Baskı Öncesi</span>
+                <ul class="dept-list">
+                  <li>Grafik İş İstasyonları</li>
+                  <li>Ambalaj Tasarım Sistemi ve 3D Modelleme</li>
+                  <li>Maket Kesim Plotter (Prototip Model Yapımı)</li>
+                  <li>Dijital Ön İzleme Yazıcıları</li>
+                </ul>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">🖨️ Baskı</span>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">✂️ Baskı Sonrası</span>
+                <ul class="dept-list">
+                  <li class="dept-sub">Kesim &amp; Ayıklama</li>
+                  <li>Sıcak Kesim</li>
+                  <li class="dept-sub">Baskı Efektleri</li>
+                  <li>Varak ve Hologram Baskı</li>
+                  <li>Green Desen Baskı</li>
+                  <li class="dept-sub">Ambalaj İşlemleri</li>
+                  <li>Oluklu Sıvama</li>
+                  <li>Pencere Takma</li>
+                  <li class="dept-sub">Yapıştırma Sistemi</li>
+                  <li>4 Nokta Yapıştırma Makinesi</li>
+                  <li>Soğuk / Sıcak / Tutkal Sistemli</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <a class="logo" href="index.html" style="display:flex;align-items:center;height:74px;overflow:hidden;"><img src="images/banner/logo.png" alt="KANGROO" style="height:110px;width:auto;display:block;" /></a>
+    <nav class="right">
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+      <button class="toggle" data-mode-toggle data-current="paper" style="padding:8px 12px;" title="Tema değiştir">
+  <svg data-l="paper" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  <svg data-l="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="banner" src="images/banner/koli.png" alt="KANGROO Ambalaj Atölyesi" style="width:100%;aspect-ratio:21/8;object-fit:cover;display:block;" />
+    <div class="overlay">
+      <div class="text-box">
+        <span class="label">Bahar 2026 Koleksiyonu</span>
+        <h1>Markanızı <span class="hero-word"><span class="word-inner">saran</span></span><br> ambalajlar.</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="cats-sec" id="urunler">
+    <div class="wrap">
+      <div class="chips">
+        <a class="chip on" href="urunler.html">Tümü</a>
+        <a class="chip" href="urunler.html#kutular">Kutular</a>
+        <a class="chip" href="urunler.html#cantalar">Çanta &amp; Kese</a>
+        <a class="chip" href="urunler.html#etiket">Etiket</a>
+        <a class="chip" href="urunler.html#muhur">Mühür &amp; Kurdele</a>
+        <a class="chip" href="urunler.html#setler">Hediye setleri</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog">
+    <div class="wrap">
+      <div class="sec-head"><h2>Öne çıkan ürünler</h2><a class="label" href="urunler.html" style="text-decoration:none;">Tümünü gör →</a></div>
+      <div class="pgrid">
+        <a class="product" href="urun.html">
+          <div class="ph" style="aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--bg);">
+            <span class="tag">Çok satan</span>
+            <img src="images/urunler/karton-canta-1/kutu1-1.png" alt="Karton Çanta 1" class="img-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);transition:opacity .4s;" />
+            <img src="images/urunler/karton-canta-1/kutu1-2.png" alt="Karton Çanta 1 detay" class="img-alt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);opacity:0;transition:opacity .4s;" />
+          </div>
+          <div class="info"><h3>Karton Çanta 1</h3><div class="row"><span class="meta">Geri dönüştürülmüş · 3 boy</span><span class="price">Numune</span></div></div>
+        </a>
+        <a class="product" href="urun2.html">
+          <div class="ph" style="aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--bg);">
+            <span class="tag">Yeni</span>
+            <img src="images/urunler/karton-canta-2/kutu2-1.png" alt="Karton Çanta 2" class="img-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);transition:opacity .4s;" />
+            <img src="images/urunler/karton-canta-2/kutu2-2.png" alt="Karton Çanta 2 detay" class="img-alt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);opacity:0;transition:opacity .4s;" />
+          </div>
+          <div class="info"><h3>Karton Çanta 2</h3><div class="row"><span class="meta">Geri dönüştürülmüş · 3 boy</span><span class="price">Numune</span></div></div>
+        </a>
+        <a class="product" href="urun3.html">
+          <div class="ph" style="aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--bg);">
+            <img src="images/urunler/poset-canta/poset1-1.png" alt="Poşet Çanta" class="img-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);transition:opacity .4s;" />
+            <img src="images/urunler/poset-canta/poset1-2.png" alt="Poşet Çanta detay" class="img-alt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);opacity:0;transition:opacity .4s;" />
+          </div>
+          <div class="info"><h3>Poşet Çanta</h3><div class="row"><span class="meta">Kraft kâğıt · 3 boy</span><span class="price">Numune</span></div></div>
+        </a>
+        <a class="product" href="urun4.html">
+          <div class="ph" style="aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--bg);">
+            <span class="tag">Yeni</span>
+            <img src="images/urunler/karton-kutu/karton%20kutu1-1.png" alt="Karton Kutu" class="img-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);transition:opacity .4s;" />
+            <img src="images/urunler/karton-kutu/karton%20kutu1-2.png" alt="Karton Kutu detay" class="img-alt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg);opacity:0;transition:opacity .4s;" />
+          </div>
+          <div class="info"><h3>Karton Kutu</h3><div class="row"><span class="meta">Sert karton · özel ölçü</span><span class="price">Numune</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="ph" data-cap="Atölye görseli"></div>
+        <div class="copy">
+          <span class="label">Atölyemiz</span>
+          <h2>Her sipariş, <em>Kızılay'daki</em> tezgâhımızda doğar.</h2>
+          <p>Tasarımdan üretime tek çatı altında çalışıyoruz. Malzemeyi seçer, kalıbı çıkarır, numuneyi size teslim eder ve özenle seriye geçeriz.</p>
+          <a class="more" href="hakkimizda.html">Hikâyemizi okuyun →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap">
+      <div class="strip-grid">
+        <div class="item"><span class="n">01</span><h3>Birlikte tasarlarız</h3><p>Markanızı dinler, kalıp ve malzemeyi sıfırdan kurarız.</p></div>
+        <div class="item"><span class="n">02</span><h3>Numune yaparız</h3><p>Onaydan önce elinizde tutacağınız fiziksel numuneyi üretiriz.</p></div>
+        <div class="item"><span class="n">03</span><h3>Az adetli üretiriz</h3><p>50 adetten başlayan, özenli ve tutarlı seri üretim.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="logos">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Birlikte çalıştığımız markalardan</span></div>
+      <div class="row">
+        <span>Maison</span><span>Lokum&amp;Co</span><span>Atölye Mira</span><span>Verde</span><span>Kören</span><span>Solis</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><div class="logo"><img src="images/banner/logo.png" alt="KANGROO" style="height:36px;width:auto;display:block;" /></div><p class="desc">Butik markalar için elde tasarlanan, az sayıda üretilen ambalaj atölyesi. Ankara, 1996.</p></div>
+      <div class="fcol"><span class="label">Ürünler</span><a href="urunler.html#kutular">Kutular</a><a href="urunler.html#cantalar">Çantalar</a><a href="urunler.html#etiket">Etiket &amp; Mühür</a><a href="urunler.html#setler">Hediye setleri</a></div>
+      <div class="fcol"><span class="label">Kurumsal</span><a href="hakkimizda.html">Hakkımızda</a><a href="iletisim.html">İletişim</a></div>
+      <div class="fcol"><span class="label">İletişim</span><a href="mailto:merhaba@kangroo.com.tr">merhaba@kangroo.com.tr</a><a href="tel:+903120000000">+90 312 000 00 00</a><p>Kızılay, Ankara</p></div>
+    </div>
+    <div class="fbottom"><span>© 2026 KANGROO</span><span>Tüm hakları saklıdır</span></div>
+  </div>
+</footer>
+<script src="assets/mode.js"></script>
+<script>
+  (function() {
+    var words = ['saran', 'koruyan', 'yükselten', 'anlatan'];
+    var idx = 0;
+    var el = document.querySelector('.hero-word');
+    if (!el) return;
+    var inner = el.querySelector('.word-inner');
+
+    setInterval(function() {
+      el.classList.remove('enter');
+      el.classList.add('exit');
+      setTimeout(function() {
+        idx = (idx + 1) % words.length;
+        inner.textContent = words[idx];
+        el.classList.remove('exit');
+        el.classList.add('enter');
+      }, 150);
+    }, 2800);
+  })();
+</script>
+<script>
+  document.querySelectorAll('.product').forEach(function(card) {
+    var main = card.querySelector('.img-main');
+    var alt  = card.querySelector('.img-alt');
+    if (!main || !alt) return;
+    card.addEventListener('mouseenter', function() { main.style.opacity = '0'; alt.style.opacity = '1'; });
+    card.addEventListener('mouseleave', function() { main.style.opacity = '1'; alt.style.opacity = '0'; });
+  });
+</script>
+</body>
+</html>

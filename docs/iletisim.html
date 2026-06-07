@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="tr" data-mode="paper">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KANGROO — İletişim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/vitrin.css" />
+<style>
+  header.site {
+    background: linear-gradient(to right, #888888 0%, #1a1a1a 30%, #000000 50%, #1a1a1a 70%, #888888 100%) !important;
+    backdrop-filter: none !important;
+  }
+  header.site nav a,
+  header.site .toggle { color: #f5f5f5 !important; font-size: 14px !important; letter-spacing: .14em !important; opacity: 1 !important; font-weight: 500 !important; }
+  header.site .toggle { border-color: rgba(255,255,255,.3) !important; font-size: 12px !important; }
+
+  /* ── Hero ── */
+  .iletisim-hero {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .iletisim-hero .label { margin-bottom: 14px; }
+  .iletisim-hero h1 {
+    font-family: "Spectral", serif;
+    font-weight: 500;
+    font-size: clamp(34px, 4.8vw, 64px);
+    line-height: 1.06;
+    margin-bottom: 16px;
+  }
+  .iletisim-hero h1 em { font-style: italic; color: var(--accent); }
+  .iletisim-hero p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+
+  /* ── Üst: Form grid ── */
+  .form-sec { padding: 32px 0 0; }
+  .form-ana-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+
+  /* Sol: başlık + input alanları */
+  .form-sol {
+    padding: 44px 40px;
+    border-right: 1px solid var(--line);
+  }
+  .form-sol h2 {
+    font-family: "Spectral", serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 28px;
+  }
+
+  /* Sağ: konu + mesaj + gönder */
+  .form-sag {
+    padding: 44px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 34px;
+    cursor: pointer;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--ink); }
+  .form-group textarea { resize: vertical; flex: 1; min-height: 160px; }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--muted); opacity: .6; }
+
+  .form-sag .form-group:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+  .form-sag .form-group:nth-child(2) textarea { flex: 1; }
+
+  .form-submit .btn {
+    width: 100%;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    border: none;
+    font-family: "Jost", sans-serif;
+  }
+  .form-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── Alt: Bilgiler + Harita ── */
+  .alt-sec { padding: 0 0 56px; }
+  .alt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-top: none;
+  }
+
+  /* Sol: iletişim bilgileri */
+  .iletisim-bilgi {
+    padding: 40px 40px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .bilgi-blok .blok-baslik {
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .bilgi-blok p,
+  .bilgi-blok a {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+  }
+  .bilgi-blok a:hover { color: var(--accent); }
+  .bilgi-blok .vurgu {
+    font-family: "Spectral", serif;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .sosyal-satir { display: flex; gap: 14px; margin-top: 4px; }
+  .sosyal-satir a {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color .2s, border-color .2s;
+  }
+  .sosyal-satir a:hover { color: var(--accent); border-color: var(--accent); }
+  .calisma-saatleri { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+  /* Sağ: harita */
+  .alt-harita { overflow: hidden; }
+  .alt-harita iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    border: none;
+    filter: grayscale(25%);
+  }
+
+  @media (max-width: 900px) {
+    .form-ana-grid { grid-template-columns: 1fr; }
+    .form-sol { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
+    .form-sag { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .alt-grid { grid-template-columns: 1fr; }
+    .iletisim-bilgi { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
+    .alt-harita iframe { min-height: 260px; }
+  }
+</style>
+</head>
+<body>
+<div class="util" style="background:#222222;color:#cccccc;">Ücretsiz numune · 50 adetten başlayan özel üretim · Türkiye geneli kargo</div>
+<header class="site">
+  <div class="wrap bar">
+    <nav class="left">
+      <a href="urunler.html">Ürünler</a>
+      <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+      <div class="nav-item has-dropdown">
+        <a href="#">Departmanlar<svg class="chevron-icon" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="dept-mega">
+          <div class="dept-inner">
+            <div class="dept-label-row"><span>🏭 Departmanlar</span></div>
+            <div class="dept-cols">
+              <div class="dept-col">
+                <span class="dept-col-head">📐 Baskı Öncesi</span>
+                <ul class="dept-list">
+                  <li>Grafik İş İstasyonları</li>
+                  <li>Ambalaj Tasarım Sistemi ve 3D Modelleme</li>
+                  <li>Maket Kesim Plotter (Prototip Model Yapımı)</li>
+                  <li>Dijital Ön İzleme Yazıcıları</li>
+                </ul>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">🖨️ Baskı</span>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">✂️ Baskı Sonrası</span>
+                <ul class="dept-list">
+                  <li class="dept-sub">Kesim &amp; Ayıklama</li>
+                  <li>Sıcak Kesim</li>
+                  <li class="dept-sub">Baskı Efektleri</li>
+                  <li>Varak ve Hologram Baskı</li>
+                  <li>Green Desen Baskı</li>
+                  <li class="dept-sub">Ambalaj İşlemleri</li>
+                  <li>Oluklu Sıvama</li>
+                  <li>Pencere Takma</li>
+                  <li class="dept-sub">Yapıştırma Sistemi</li>
+                  <li>4 Nokta Yapıştırma Makinesi</li>
+                  <li>Soğuk / Sıcak / Tutkal Sistemli</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <a class="logo" href="index.html" style="display:flex;align-items:center;height:74px;overflow:hidden;">
+      <img src="images/banner/logo.png" alt="KANGROO" style="height:110px;width:auto;display:block;" />
+    </a>
+    <nav class="right">
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html" class="active">İletişim</a>
+      <button class="toggle" data-mode-toggle data-current="paper" style="padding:8px 12px;" title="Tema değiştir">
+        <svg data-l="paper" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg data-l="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="iletisim-hero">
+    <div class="wrap">
+      <span class="label">İletişim</span>
+      <h1>Projenizi birlikte <em>konuşalım.</em></h1>
+      <p>Numune talebi, özel üretim soruları veya genel bilgi için bize yazın. En geç bir iş günü içinde dönüş yapıyoruz.</p>
+    </div>
+  </section>
+
+  <!-- Üst: Form (sol: başlık+alanlar, sağ: konu+mesaj) -->
+  <section class="form-sec">
+    <div class="wrap">
+      <form id="iletisim-form" onsubmit="formGonder(event)">
+        <div class="form-ana-grid">
+
+          <div class="form-sol">
+            <h2>Bize yazın</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ad">Ad Soyad</label>
+                <input type="text" id="ad" name="ad" placeholder="Adınız" required />
+              </div>
+              <div class="form-group">
+                <label for="sirket">Şirket / Marka</label>
+                <input type="text" id="sirket" name="sirket" placeholder="Markanız (isteğe bağlı)" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eposta">E-posta</label>
+                <input type="email" id="eposta" name="eposta" placeholder="ornek@marka.com" required />
+              </div>
+              <div class="form-group">
+                <label for="telefon">Telefon</label>
+                <input type="tel" id="telefon" name="telefon" placeholder="+90 5XX XXX XX XX" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-sag">
+            <div class="form-group">
+              <label for="konu">Konu</label>
+              <select id="konu" name="konu" required>
+                <option value="" disabled selected>Konu seçin</option>
+                <option value="numune">Numune talebi</option>
+                <option value="teklif">Fiyat teklifi</option>
+                <option value="tasarim">Tasarım & danışmanlık</option>
+                <option value="uretim">Özel üretim sorgusu</option>
+                <option value="diger">Diğer</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1;display:flex;flex-direction:column;">
+              <label for="mesaj">Mesajınız</label>
+              <textarea id="mesaj" name="mesaj" placeholder="Projeniz hakkında kısaca bilgi verin — ürün türü, adet, özel istekler…" required style="flex:1;"></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn solid">Mesajı gönder</button>
+            </div>
+            <p class="form-note">Bilgileriniz yalnızca size dönüş yapmak için kullanılır, üçüncü taraflarla paylaşılmaz.</p>
+          </div>
+
+        </div>
+      </form>
+      <div id="form-basari" style="display:none; padding:28px; background:var(--surface); border:1px solid var(--line); text-align:center; margin-top:0;">
+        <p style="font-family:'Spectral',serif; font-size:20px; margin-bottom:8px;">Mesajınız alındı.</p>
+        <p style="font-size:14px; color:var(--muted);">En geç bir iş günü içinde size dönüş yapacağız.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alt: Bilgiler (sol) + Harita (sağ) -->
+  <section class="alt-sec">
+    <div class="wrap">
+      <div class="alt-grid">
+
+        <div class="iletisim-bilgi">
+          <div class="bilgi-blok">
+            <div class="blok-baslik">Adres</div>
+            <p class="vurgu">KANGROO Ambalaj Atölyesi</p>
+            <p>Macun Mahallesi, Anadolu Bulvarı<br>ATB İş Merkezi D/E Blok No: 136<br>06374 Yenimahalle / Ankara</p>
+            <a href="https://maps.google.com/?q=Macun+Mahallesi+Anadolu+Bulvari+ATB+Is+Merkezi+Yenimahalle+Ankara" target="_blank" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:3px;margin-top:8px;display:inline-block;">Haritada aç →</a>
+          </div>
+          <div class="bilgi-blok">
+            <div class="blok-baslik">Telefon & E-posta</div>
+            <a href="tel:+903124670063" class="vurgu">0312 467 00 63</a>
+            <a href="tel:+903124670063" style="color:var(--muted);font-size:14px;">Faks: 0312 467 00 63</a>
+            <a href="mailto:info@kangrootanitim.com">info@kangrootanitim.com</a>
+          </div>
+          <div class="bilgi-blok">
+            <div class="blok-baslik">Çalışma Saatleri</div>
+            <div class="calisma-saatleri">
+              Pazartesi — Cuma &nbsp;<strong>09:00 — 18:00</strong><br>
+              Cumartesi &nbsp;<strong>10:00 — 14:00</strong><br>
+              Pazar — Kapalı
+            </div>
+          </div>
+          <div class="bilgi-blok">
+            <div class="blok-baslik">Sosyal Medya</div>
+            <div class="sosyal-satir">
+              <a href="#">Instagram</a>
+              <a href="#">LinkedIn</a>
+              <a href="#">Behance</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="alt-harita">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=32.7587%2C39.9390%2C32.7787%2C39.9590&layer=mapnik&marker=39.9490%2C32.7687"
+            title="KANGROO Atölye — ATB İş Merkezi, Yenimahalle, Ankara"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><div class="logo"><img src="images/banner/logo.png" alt="KANGROO" style="height:36px;width:auto;display:block;" /></div><p class="desc">Butik markalar için elde tasarlanan, az sayıda üretilen ambalaj atölyesi. Ankara, 1996.</p></div>
+      <div class="fcol"><span class="label">Ürünler</span><a href="urunler.html#kutular">Kutular</a><a href="urunler.html#cantalar">Çantalar</a><a href="urunler.html#etiket">Etiket &amp; Mühür</a><a href="urunler.html#setler">Hediye setleri</a></div>
+      <div class="fcol"><span class="label">Kurumsal</span><a href="hakkimizda.html">Hakkımızda</a><a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+      <div class="nav-item has-dropdown">
+        <a href="#">Departmanlar<svg class="chevron-icon" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="dept-mega">
+          <div class="dept-inner">
+            <div class="dept-label-row"><span>🏭 Departmanlar</span></div>
+            <div class="dept-cols">
+              <div class="dept-col">
+                <span class="dept-col-head">📐 Baskı Öncesi</span>
+                <ul class="dept-list">
+                  <li>Grafik İş İstasyonları</li>
+                  <li>Ambalaj Tasarım Sistemi ve 3D Modelleme</li>
+                  <li>Maket Kesim Plotter (Prototip Model Yapımı)</li>
+                  <li>Dijital Ön İzleme Yazıcıları</li>
+                </ul>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">🖨️ Baskı</span>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">✂️ Baskı Sonrası</span>
+                <ul class="dept-list">
+                  <li class="dept-sub">Kesim &amp; Ayıklama</li>
+                  <li>Sıcak Kesim</li>
+                  <li class="dept-sub">Baskı Efektleri</li>
+                  <li>Varak ve Hologram Baskı</li>
+                  <li>Green Desen Baskı</li>
+                  <li class="dept-sub">Ambalaj İşlemleri</li>
+                  <li>Oluklu Sıvama</li>
+                  <li>Pencere Takma</li>
+                  <li class="dept-sub">Yapıştırma Sistemi</li>
+                  <li>4 Nokta Yapıştırma Makinesi</li>
+                  <li>Soğuk / Sıcak / Tutkal Sistemli</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><a href="iletisim.html">İletişim</a></div>
+      <div class="fcol"><span class="label">İletişim</span><a href="mailto:info@kangrootanitim.com">info@kangrootanitim.com</a><a href="tel:+903124670063">0312 467 00 63</a><p>Yenimahalle, Ankara</p></div>
+    </div>
+    <div class="fbottom"><span>© 2026 KANGROO</span><span>Tüm hakları saklıdır</span></div>
+  </div>
+</footer>
+
+
+<script src="assets/mode.js"></script>
+<script>
+  function formGonder(e) {
+    e.preventDefault();
+    document.getElementById('iletisim-form').style.display = 'none';
+    document.getElementById('form-basari').style.display = 'block';
+  }
+</script>
+</body>
+</html>

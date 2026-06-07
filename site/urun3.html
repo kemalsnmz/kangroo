@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="tr" data-mode="paper">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KANGROO — Poşet Çanta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/vitrin.css" />
+<style>
+  header.site {
+    background: linear-gradient(to right, #888888 0%, #1a1a1a 30%, #000000 50%, #1a1a1a 70%, #888888 100%) !important;
+    backdrop-filter: none !important;
+  }
+  header.site nav a,
+  header.site .toggle { color: #f5f5f5 !important; font-size: 14px !important; letter-spacing: .14em !important; opacity: 1 !important; font-weight: 500 !important; }
+  header.site .toggle { border-color: rgba(255,255,255,.3) !important; font-size: 12px !important; }
+
+  .urun-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    padding: 32px 40px 80px;
+    align-items: start;
+  }
+
+  .galeri { position: sticky; top: 100px; display: flex; gap: 12px; }
+  .galeri .thumb-row { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+  .galeri .thumb {
+    width: 72px; height: 72px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    overflow: hidden; cursor: pointer; flex-shrink: 0;
+    transition: border-color .2s;
+  }
+  .galeri .thumb.active { border-color: var(--ink); }
+  .galeri .thumb img { width: 100%; height: 100%; object-fit: contain; }
+  .galeri .thumb:hover { border-color: var(--muted); }
+  .galeri .ana-resim {
+    background-color: var(--bg);
+    aspect-ratio: 3/4; flex: 1;
+    max-height: calc(100vh - 74px - 32px);
+    overflow: hidden; cursor: zoom-in;
+    border: 1px solid var(--line);
+  }
+  .galeri .ana-resim img {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    object-fit: contain; object-position: center;
+    transform: scale(1.12);
+    transition: transform .4s ease;
+  }
+  .galeri .ana-resim:hover img { transform: scale(1.18); }
+
+  .urun-bilgi { padding-top: 8px; }
+  .urun-bilgi .crumb { margin-bottom: 18px; }
+  .urun-bilgi .crumb a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+  .urun-bilgi .crumb a:hover { color: var(--ink); }
+  .urun-bilgi .crumb span { color: var(--muted); font-size: 12px; }
+  .urun-bilgi h1 { font-family: "Spectral", serif; font-weight: 500; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.06; margin-bottom: 16px; }
+  .urun-bilgi .ozet { font-size: 16px; line-height: 1.7; color: var(--muted); margin-bottom: 28px; max-width: 48ch; }
+
+  .ozellik-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); margin-bottom: 28px; }
+  .ozellik-item { padding: 14px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .ozellik-item:nth-child(even) { border-right: none; }
+  .ozellik-item:nth-last-child(-n+2) { border-bottom: none; }
+  .ozellik-item .ok { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .ozellik-item .deger { font-size: 15px; font-weight: 500; }
+
+  .numune-box { background: var(--surface); padding: 24px; margin-bottom: 24px; }
+  .numune-box p { font-size: 14px; line-height: 1.6; color: var(--muted); margin-bottom: 16px; }
+  .numune-box .btn { width: 100%; text-align: center; display: block; }
+
+  .detaylar { border-top: 1px solid var(--line); padding-top: 24px; }
+  .detaylar h3 { font-family: "Spectral", serif; font-weight: 500; font-size: 18px; margin-bottom: 12px; }
+  .detaylar ul { list-style: none; padding: 0; }
+  .detaylar ul li { font-size: 15px; color: var(--muted); line-height: 1.7; padding: 4px 0; border-bottom: 1px solid var(--line); }
+  .detaylar ul li::before { content: "—  "; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .urun-layout { grid-template-columns: 1fr; gap: 32px; }
+    .galeri { position: static; flex-direction: column-reverse; }
+    .galeri .thumb-row { flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<div class="util" style="background:#222222;color:#cccccc;">Ücretsiz numune · 50 adetten başlayan özel üretim · Türkiye geneli kargo</div>
+<header class="site">
+  <div class="wrap bar">
+    <nav class="left">
+      <a href="urunler.html" class="active">Ürünler</a>
+      <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+      <div class="nav-item has-dropdown">
+        <a href="#">Departmanlar<svg class="chevron-icon" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="dept-mega">
+          <div class="dept-inner">
+            <div class="dept-label-row"><span>🏭 Departmanlar</span></div>
+            <div class="dept-cols">
+              <div class="dept-col">
+                <span class="dept-col-head">📐 Baskı Öncesi</span>
+                <ul class="dept-list">
+                  <li>Grafik İş İstasyonları</li>
+                  <li>Ambalaj Tasarım Sistemi ve 3D Modelleme</li>
+                  <li>Maket Kesim Plotter (Prototip Model Yapımı)</li>
+                  <li>Dijital Ön İzleme Yazıcıları</li>
+                </ul>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">🖨️ Baskı</span>
+              </div>
+              <div class="dept-col">
+                <span class="dept-col-head">✂️ Baskı Sonrası</span>
+                <ul class="dept-list">
+                  <li class="dept-sub">Kesim &amp; Ayıklama</li>
+                  <li>Sıcak Kesim</li>
+                  <li class="dept-sub">Baskı Efektleri</li>
+                  <li>Varak ve Hologram Baskı</li>
+                  <li>Green Desen Baskı</li>
+                  <li class="dept-sub">Ambalaj İşlemleri</li>
+                  <li>Oluklu Sıvama</li>
+                  <li>Pencere Takma</li>
+                  <li class="dept-sub">Yapıştırma Sistemi</li>
+                  <li>4 Nokta Yapıştırma Makinesi</li>
+                  <li>Soğuk / Sıcak / Tutkal Sistemli</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <a class="logo" href="index.html" style="display:flex;align-items:center;height:74px;overflow:hidden;">
+      <img src="images/banner/logo.png" alt="KANGROO" style="height:110px;width:auto;display:block;" />
+    </a>
+    <nav class="right">
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+      <button class="toggle" data-mode-toggle data-current="paper" style="padding:8px 12px;" title="Tema değiştir">
+        <svg data-l="paper" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg data-l="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap urun-layout">
+
+    <div class="galeri">
+      <div class="thumb-row">
+        <div class="thumb active" onclick="degistir(this, 'images/urunler/poset-canta/poset1-1.png', 'contain', 1.12)">
+          <img src="images/urunler/poset-canta/poset1-1.png" alt="görsel 1" />
+        </div>
+        <div class="thumb" onclick="degistir(this, 'images/urunler/poset-canta/poset1-2.png', 'contain', 1)">
+          <img src="images/urunler/poset-canta/poset1-2.png" alt="görsel 2" />
+        </div>
+        <div class="thumb" onclick="degistir(this, 'images/urunler/poset-canta/poset1-3.png', 'contain', 1)">
+          <img src="images/urunler/poset-canta/poset1-3.png" alt="görsel 3" />
+        </div>
+      </div>
+      <div class="ana-resim">
+        <img id="ana-img" src="images/urunler/poset-canta/poset1-1.png" alt="Poşet Çanta" />
+      </div>
+    </div>
+
+    <div class="urun-bilgi">
+      <div class="crumb">
+        <a href="urunler.html">Ürünler</a>
+        <span> &nbsp;/&nbsp; </span>
+        <a href="urunler.html#cantalar">Çanta &amp; Kese</a>
+        <span> &nbsp;/&nbsp; Poşet Çanta</span>
+      </div>
+
+      <span class="tag" style="display:inline-block;margin-bottom:14px;">Yeni</span>
+      <h1>Poşet Çanta</h1>
+      <p class="ozet">Hafif ve işlevsel kraft kâğıttan üretilen poşet çanta. Markanıza özel baskı, renk ve ölçü seçenekleriyle üretilir.</p>
+
+      <div class="ozellik-grid">
+        <div class="ozellik-item"><div class="ok">Malzeme</div><div class="deger">Kraft kâğıt</div></div>
+        <div class="ozellik-item"><div class="ok">Ölçü</div><div class="deger">S / M / L (3 boy)</div></div>
+        <div class="ozellik-item"><div class="ok">Baskı</div><div class="deger">Özel logo & renk</div></div>
+        <div class="ozellik-item"><div class="ok">Min. adet</div><div class="deger">50 adet</div></div>
+        <div class="ozellik-item"><div class="ok">Teslimat</div><div class="deger">10–15 iş günü</div></div>
+        <div class="ozellik-item"><div class="ok">Sertifika</div><div class="deger">FSC sertifikalı</div></div>
+      </div>
+
+      <div class="numune-box">
+        <p>Siparişe geçmeden önce ücretsiz fiziksel numune talep edebilirsiniz. Numuneler 3–5 iş günü içinde kargoya verilir.</p>
+        <a class="btn solid" href="iletisim.html">Numune talep et</a>
+      </div>
+
+      <div class="detaylar">
+        <h3>Ürün detayları</h3>
+        <ul>
+          <li>90 gr kraft kâğıt, sağlam yapı</li>
+          <li>Tek veya çift taraflı baskı seçeneği</li>
+          <li>Mat veya parlak laminasyon opsiyonu</li>
+          <li>Yaldız ve kabartma baskı uygulanabilir</li>
+          <li>%100 geri dönüştürülebilir malzeme</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><div class="logo"><img src="images/banner/logo.png" alt="KANGROO" style="height:36px;width:auto;display:block;" /></div><p class="desc">Butik markalar için elde tasarlanan, az sayıda üretilen ambalaj atölyesi. Ankara, 1996.</p></div>
+      <div class="fcol"><span class="label">Ürünler</span><a href="urunler.html#cantalar">Çantalar</a><a href="urunler.html#kutular">Kutular</a><a href="urunler.html#etiket">Etiket &amp; Mühür</a><a href="urunler.html#setler">Hediye setleri</a></div>
+      <div class="fcol"><span class="label">Kurumsal</span><a href="hakkimizda.html">Hakkımızda</a><a href="iletisim.html">İletişim</a></div>
+      <div class="fcol"><span class="label">İletişim</span><a href="mailto:merhaba@kangroo.com.tr">merhaba@kangroo.com.tr</a><a href="tel:+903120000000">+90 312 000 00 00</a><p>Kızılay, Ankara</p></div>
+    </div>
+    <div class="fbottom"><span>© 2026 KANGROO</span><span>Tüm hakları saklıdır</span></div>
+  </div>
+</footer>
+
+<script src="assets/mode.js"></script>
+<script>
+  function degistir(el, src, fit, scale) {
+    var img = document.getElementById('ana-img');
+    img.src = src;
+    img.style.objectFit = fit || 'contain';
+    img.style.transform = 'scale(' + (scale || 1) + ')';
+    document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>

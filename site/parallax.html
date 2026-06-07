@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html lang="tr" data-mode="paper">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KANGROO — Atölyemiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/vitrin.css" />
+<style>
+  header.site {
+    background: linear-gradient(to right, #888888 0%, #1a1a1a 30%, #000000 50%, #1a1a1a 70%, #888888 100%) !important;
+    backdrop-filter: none !important;
+  }
+  header.site nav a,
+  header.site .toggle { color: #f5f5f5 !important; font-size: 14px !important; letter-spacing: .14em !important; opacity: 1 !important; font-weight: 500 !important; }
+  header.site .toggle { border-color: rgba(255,255,255,.3) !important; font-size: 12px !important; }
+
+  /* ── Parallax bölümleri ── */
+  .px-block {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .px-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.38);
+  }
+  .px-block .px-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #f7f4ec;
+    padding: 60px 40px;
+    max-width: 700px;
+  }
+  .px-block .px-label {
+    font-size: 11px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: 18px;
+  }
+  .px-block h2 {
+    font-family: "Spectral", serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 66px);
+    line-height: 1.06;
+    letter-spacing: -.01em;
+  }
+  .px-block h2 em { font-style: italic; }
+  .px-block p {
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: .88;
+    max-width: 54ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .px-block .btn {
+    margin-top: 32px;
+    border: 1px solid rgba(247,244,236,.65);
+    color: #f7f4ec;
+    background: transparent;
+  }
+  .px-block .btn:hover { background: rgba(247,244,236,.14); }
+
+  /* Renk paleti — resim yokken gradient arka planlar */
+  .px-1 { background-image: url('images/parallax/bg1.jpg'); background-color: #1a1f18; }
+  .px-2 { background-image: url('images/parallax/bg2.jpg'); background-color: #0d1210; }
+  .px-3 { background-image: url('images/parallax/bg3.jpg'); background-color: #16190e; }
+  .px-4 { background-image: url('images/parallax/bg4.jpg'); background-color: #0a0d08; }
+
+  /* Resim yoksa degrade ile güzel görünsün */
+  .px-1:not([style*="url"]) { background: linear-gradient(135deg, #2f4a33 0%, #1a2e1d 100%); }
+
+  /* ── İçerik bölümleri ── */
+  .content-block {
+    padding: 100px 0;
+    background: var(--bg);
+  }
+  .content-block.alt {
+    background: var(--surface);
+  }
+  .content-block .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .content-block .wrap.centered {
+    grid-template-columns: 1fr;
+    text-align: center;
+    max-width: 760px;
+  }
+  .content-block h2 {
+    font-family: "Spectral", serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 46px);
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+  .content-block h2 em { font-style: italic; color: var(--accent); }
+  .content-block p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 14px;
+    max-width: 50ch;
+  }
+  .content-block .wrap.centered p { max-width: 64ch; margin-left: auto; margin-right: auto; }
+  .content-block .num-row {
+    display: flex;
+    gap: 48px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .content-block .num-item .n {
+    font-family: "Spectral", serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .content-block .num-item .t {
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .ph-tall { background: var(--surface); aspect-ratio: 4/5; position: relative; overflow: hidden; }
+  .ph-tall::after {
+    content: attr(data-cap);
+    position: absolute; left: 12px; bottom: 10px;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ── Hero giriş ── */
+  .px-hero {
+    min-height: 100vh;
+  }
+  .px-hero .px-inner {
+    margin-top: -60px;
+  }
+
+  @media (max-width: 900px) {
+    .px-block { background-attachment: scroll; min-height: 380px; }
+    .content-block .wrap { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="util" style="background:#222222;color:#cccccc;">Ücretsiz numune · 50 adetten başlayan özel üretim · Türkiye geneli kargo</div>
+<header class="site">
+  <div class="wrap bar">
+    <nav class="left">
+      <a href="index.html#urunler">Ürünler</a>
+      
+    </nav>
+    <a class="logo" href="index.html" style="display:flex;align-items:center;height:74px;overflow:hidden;">
+      <img src="images/banner/logo.png" alt="KANGROO" style="height:110px;width:auto;display:block;" />
+    </a>
+    <nav class="right">
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+      <button class="toggle" data-mode-toggle data-current="paper" style="padding:8px 12px;" title="Tema değiştir">
+        <svg data-l="paper" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg data-l="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ① Hero parallax -->
+  <div class="px-block px-hero px-1">
+    <div class="px-inner">
+      <div class="px-label">KANGROO — 1996'dan bu yana</div>
+      <h2>Reklamın gücünü<br><em>doğru yerde</em> kullananlar.</h2>
+      <p>Stratejik düşünce ve yaratıcı üretimin kesiştiği noktada, markanıza uzun soluklu bir ses kazandırıyoruz.</p>
+      <a class="btn" href="hakkimizda.html">Bizi tanıyın →</a>
+    </div>
+  </div>
+
+  <!-- ② İçerik: Biz kimiz -->
+  <section class="content-block">
+    <div class="wrap">
+      <div class="ph-tall" data-cap="Ajans / ekip görseli"></div>
+      <div>
+        <span class="label">Biz kimiz</span>
+        <h2 style="margin-top:14px;">Ayakları yere basan bir <em>ajans.</em></h2>
+        <p>KANGROO, kurulduğu 1996 yılından bu yana sektörde edindiği tecrübe ve deneyimleri müşterilerinin ihtiyaç ve beklentileri doğrultusunda sonuç odaklı bir yaklaşımla kullanmaktadır.</p>
+        <p>Reklamın gücünün ve sınırlılıklarının farkında olarak yoluna devam eden ajansımız, etkili stratejiler üzerine oturttuğu yaratıcı çalışmalarla müşterilerine hizmet vermektedir.</p>
+        <div class="num-row">
+          <div class="num-item"><div class="n">1996</div><div class="t">Kuruluş</div></div>
+          <div class="num-item"><div class="n">28+</div><div class="t">Yıl deneyim</div></div>
+          <div class="num-item"><div class="n">500+</div><div class="t">Proje</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ Parallax: Alıntı -->
+  <div class="px-block px-2" style="min-height:400px;">
+    <div class="px-inner">
+      <div class="px-label">Felsefemiz</div>
+      <h2><em>"Yaratıcılıkta son durak,</em><br>herkesle paylaşılabilen bir sadeliktir."</h2>
+    </div>
+  </div>
+
+  <!-- ④ İçerik: Amacımız -->
+  <section class="content-block alt">
+    <div class="wrap">
+      <div>
+        <span class="label">Amacımız</span>
+        <h2 style="margin-top:14px;">Uzun soluklu <em>iletişim</em> stratejileri.</h2>
+        <p>Amacımız, uzun vadede tüketicilerin markamızla ilişkisini sağlamlaştırarak; hedef kitlenin beyninde bir yer sahiplenmek ve mümkünse oradan çıkmamaktır.</p>
+        <p>Etkisiz reklam faaliyetleri yürütmek yerine; markaya değer katacak, uzun soluklu iletişim stratejileri oluşturmayı tercih ederiz. Çünkü iletişim çalışmaları ancak somut bir fayda sağlandığında boşa gitmemiş olur.</p>
+        <p>Hedefe ulaşabilmek için önce kapsamlı ve etkin düşünür, sonra harekete geçeriz.</p>
+      </div>
+      <div class="ph-tall" data-cap="Strateji / çalışma"></div>
+    </div>
+  </section>
+
+  <!-- ⑤ Parallax: Vizyon -->
+  <div class="px-block px-3" style="min-height:460px;">
+    <div class="px-inner">
+      <div class="px-label">Vizyonumuz</div>
+      <h2>Her bütçe için <em>doğru fikir,</em><br>her marka için doğru ses.</h2>
+      <p>Seçkinci olmadığımız reklam işinde, en küçüğünden en büyüğüne her hedef için gereken fikri ve materyali üretmekteyiz.</p>
+    </div>
+  </div>
+
+  <!-- ⑥ İçerik: Nasıl çalışırız -->
+  <section class="content-block">
+    <div class="wrap centered">
+      <div>
+        <span class="label">Nasıl çalışırız</span>
+        <h2 style="margin-top:14px;">Önce düşün, <em>sonra</em> harekete geç.</h2>
+        <p>Dünyanın her gün değiştiği fikriyle beynimizi ve bildiklerimizi sürekli yenileriz. En iyi performansı gösterecek iş ortaklarıyla çalışır, sorunun çözümü için doğru insanları harekete geçiririz.</p>
+        <p>Bizim için entelektüel tartışmalar yapmak ancak sonuca yönelik bir çözüm sağlayacaksa anlamlıdır.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ Parallax: CTA -->
+  <div class="px-block px-4" style="min-height:420px;">
+    <div class="px-inner">
+      <div class="px-label">Birlikte çalışalım</div>
+      <h2>Markanıza yakışan <em>sesi</em> birlikte bulalım.</h2>
+      <a class="btn" href="iletisim.html">İletişime geçin →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><div class="logo"><img src="images/banner/logo.png" alt="KANGROO" style="height:36px;width:auto;display:block;" /></div><p class="desc">1996'dan bu yana sonuç odaklı reklamcılık. Ankara.</p></div>
+      <div class="fcol"><span class="label">Hizmetler</span><a href="#">Strateji</a><a href="#">Yaratıcı</a><a href="#">Dijital</a><a href="#">Prodüksiyon</a></div>
+      <div class="fcol"><span class="label">Kurumsal</span><a href="hakkimizda.html">Hakkımızda</a><a href="iletisim.html">İletişim</a></div>
+      <div class="fcol"><span class="label">İletişim</span><a href="mailto:merhaba@kangroo.com.tr">merhaba@kangroo.com.tr</a><a href="tel:+903120000000">+90 312 000 00 00</a><p>Ankara</p></div>
+    </div>
+    <div class="fbottom"><span>© 2026 KANGROO</span><span>Tüm hakları saklıdır</span></div>
+  </div>
+</footer>
+<script src="assets/mode.js"></script>
+</body>
+</html>
